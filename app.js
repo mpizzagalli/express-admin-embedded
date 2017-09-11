@@ -16,11 +16,11 @@ const bodyParserUrlencodedConfig = () => ({
 });
 
 const adminConfig = {
-    dpath: './express-admin-config/',
-    config: require('./express-admin-config/config.json'),
-    settings: require('./express-admin-config/settings.json'),
-    custom: require('./express-admin-config/custom.json'),
-    users: require('./express-admin-config/users.json')
+    dpath: './project/',
+    config: require('./project/config.json'),
+    settings: require('./project/settings.json'),
+    custom: require('./project/custom.json'),
+    users: require('./project/users.json')
 };
 
 
