@@ -1,0 +1,16 @@
+{
+  "pg": {
+    "database": "expressjs-dev",
+    "user": "expressjs",
+    "password": "expressjs",
+    "schema": "public"
+  },
+  "server": {
+    "port": 3000
+  },
+  "app": {
+    "layouts": true,
+    "themes": true,
+    "languages": true
+  }
+}
