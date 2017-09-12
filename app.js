@@ -54,23 +54,35 @@ const adminConfig = {
     users: require('./project/users.json')
 };
 
+const transactionsAdminConfig = {
+    dpath: './transactionsApi/',
+    config: require('./transactionsApi/config.json'),
+    settings: require('./transactionsApi/settings.json'),
+    custom: require('./transactionsApi/custom.json'),
+    users: require('./transactionsApi/users.json')
+};
+
 xAdmin.init(adminConfig, function (err, admin) {
     if (err) return console.log(err);
-    // web site
-    // console.log(admin);
-    var app = express();
-    // mount express-admin before any other middlewares
-    app.use('/admin', admin);
-    // site specific middlewares
-    // Client must send "Content-Type: application/json" header
-    app.use(bodyParser.json(bodyParserJsonConfig()));
-    app.use(bodyParser.urlencoded(bodyParserUrlencodedConfig()));
-    // site routes
-    app.get('/', function (req, res) {
-        res.send('Hello World');
-    });
-    // site server
-    app.listen(3000, function () {
-        console.log('My awesome site listening on port 3000');
+    xAdmin.init(transactionsAdminConfig, function (err2, adminTx) {
+        if (err2) return console.log(err2);
+        // web site
+        // console.log(admin);
+        var app = express();
+        // mount express-admin before any other middlewares
+        app.use('/admin', admin);
+        app.use('/transactionsApi/admin', adminTx);
+        // site specific middlewares
+        // Client must send "Content-Type: application/json" header
+        app.use(bodyParser.json(bodyParserJsonConfig()));
+        app.use(bodyParser.urlencoded(bodyParserUrlencodedConfig()));
+        // site routes
+        app.get('/', function (req, res) {
+            res.send('Hello World');
+        });
+        // site server
+        app.listen(3000, function () {
+            console.log('My awesome site listening on port 3000');
+        });
     });
 });

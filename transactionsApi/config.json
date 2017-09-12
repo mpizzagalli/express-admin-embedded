@@ -1,0 +1,17 @@
+{
+    "pg": {
+        "database": "digitalbank-transactions-api-dev",
+        "user": "digitalbank-transactions-api",
+        "password": "digitalbank-transactions-api",
+        "schema": "public"
+    },
+    "server": {
+        "port": 3000
+    },
+    "app": {
+        "layouts": true,
+        "themes": true,
+        "languages": true,
+        "root": "/transactionsApi/admin"
+    }
+}
