@@ -1,6 +1,7 @@
 const express = require('express'),
   bodyParser = require('body-parser'),
-  xAdmin = require('express-admin');
+  xAdmin = require('express-admin'),
+  pg = require('pg'),
   DEFAULT_BODY_SIZE_LIMIT = 1024 * 1024 * 10,
   DEFAULT_PARAMETER_LIMIT = 10000;
 
@@ -15,14 +16,42 @@ const bodyParserUrlencodedConfig = () => ({
   limit: DEFAULT_BODY_SIZE_LIMIT
 });
 
-const adminConfig = {
-    dpath: './project/',
-    config: require('./project/config.json'),
-    settings: require('./project/settings.json'),
-    custom: require('./project/custom.json'),
-    users: require('./project/users.json')
+const asd = {
+  "pg": {
+    "user": process.env.DB_USER,
+    "password": process.env.DB_PASSWORD,
+    "host": process.env.DB_HOST,
+    "port": process.env.DB_PORT,
+    "database": process.env.DB_NAME,
+    "schema": process.env.DB_SCHEMA || 'public'
+  },
+  "server": {
+    "port": 3000
+  },
+  "app": {
+    "layouts": true,
+    "themes": true,
+    "languages": true,
+    "root": "/admin"
+  }
 };
 
+const users = {
+  "admin": {
+    "name": "admin",
+    "admin": true,
+    "salt": process.env.API_SECRET,
+    "hash": process.env.ADMIN_HASH
+  }
+}
+
+const adminConfig = {
+    dpath: './project/',
+    config: asd,
+    settings: require('./project/settings.json'),
+    custom: require('./project/custom.json'),
+    users: users
+};
 
 xAdmin.init(adminConfig, function (err, admin) {
     if (err) return console.log(err);
