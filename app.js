@@ -23,7 +23,8 @@ const asd = {
     "host": process.env.DB_HOST,
     "port": process.env.DB_PORT,
     "database": process.env.DB_NAME,
-    "schema": process.env.DB_SCHEMA || 'public'
+    "schema": process.env.DB_SCHEMA || 'public',
+    "ssl": true
   },
   "server": {
     "port": 3000
@@ -40,7 +41,7 @@ const users = {
   "admin": {
     "name": "admin",
     "admin": true,
-    "salt": process.env.API_SECRET,
+    "salt": process.env.API_SALT,
     "hash": process.env.ADMIN_HASH
   }
 }
@@ -50,7 +51,7 @@ const adminConfig = {
     config: asd,
     settings: require('./project/settings.json'),
     custom: require('./project/custom.json'),
-    users: users
+    users: require('./project/users.json')
 };
 
 xAdmin.init(adminConfig, function (err, admin) {
