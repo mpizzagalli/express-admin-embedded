@@ -54,24 +54,30 @@ const adminConfig = {
     users: require('./project/users.json')
 };
 
+console.log(asd);
+console.log('Starting admin');
+
 xAdmin.init(adminConfig, function (err, admin) {
-    if (err) return console.log(err);
-    // web site
-    // console.log(admin);
-    var app = express();
-    // mount express-admin before any other middlewares
-    app.use('/admin', admin);
-    // site specific middlewares
-    // Client must send "Content-Type: application/json" header
-    app.use(bodyParser.json(bodyParserJsonConfig()));
-    app.use(bodyParser.urlencoded(bodyParserUrlencodedConfig()));
-    // site routes
-    app.get('/', function (req, res) {
-        res.send('Hello World');
-    });
-    // site server
-    const port = process.env.PORT || 3000;
-    app.listen(port, function () {
-        console.log(`My awesome site listening on port ${port}`);
-    });
+  console.log('Admin started');
+  if (err) return console.log(err);
+  // web site
+  // console.log(admin);
+  console.log('Starting express app');
+  var app = express();
+  // mount express-admin before any other middlewares
+  app.use('/admin', admin);
+  // site specific middlewares
+  // Client must send "Content-Type: application/json" header
+  app.use(bodyParser.json(bodyParserJsonConfig()));
+  app.use(bodyParser.urlencoded(bodyParserUrlencodedConfig()));
+  // site routes
+  app.get('/', function (req, res) {
+      res.send('Hello World');
+  });
+  // site server
+  const port = process.env.PORT || 3000;
+  console.log('Port ', port);
+  app.listen(port, function () {
+      console.log(`My awesome site listening on port ${port}`);
+  });
 });
