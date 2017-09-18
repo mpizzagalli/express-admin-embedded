@@ -57,7 +57,11 @@ const adminConfig = {
 console.log(asd);
 console.log('Starting admin');
 
-// xAdmin.init(adminConfig, function (err, admin) {
+const client = new pg.Client(asd.pg);
+client.connect((err, db) => {
+  console.log('db connected');
+  if (err) return console.log(err);
+  // xAdmin.init(adminConfig, function (err, admin) {
   console.log('Admin started');
   // if (err) return console.log(err);
   // web site
@@ -72,12 +76,14 @@ console.log('Starting admin');
   app.use(bodyParser.urlencoded(bodyParserUrlencodedConfig()));
   // site routes
   app.get('/', function (req, res) {
-      res.send('Hello World');
+    res.send('Hello World');
   });
   // site server
   const port = process.env.PORT || 3000;
   console.log('Port ', port);
   app.listen(port, function () {
-      console.log(`My awesome site listening on port ${port}`);
+    console.log(`My awesome site listening on port ${port}`);
   });
+});
+
 // });
