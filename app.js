@@ -36,15 +36,15 @@ const asd = {
     "root": "/admin"
   }
 };
-
-const users = {
-  "admin": {
-    "name": "admin",
-    "admin": true,
-    "salt": process.env.API_SALT,
-    "hash": process.env.ADMIN_HASH
-  }
-}
+//
+// const users = {
+//   "admin": {
+//     "name": "admin",
+//     "admin": true,
+//     "salt": process.env.API_SALT,
+//     "hash": process.env.ADMIN_HASH
+//   }
+// }
 
 const adminConfig = {
     dpath: './project/',
@@ -70,7 +70,8 @@ xAdmin.init(adminConfig, function (err, admin) {
         res.send('Hello World');
     });
     // site server
-    app.listen(3000, function () {
-        console.log('My awesome site listening on port 3000');
+    const port = process.env.PORT || 3000
+    app.listen(port, function () {
+        console.log(`My awesome site listening on port ${port}`);
     });
 });
