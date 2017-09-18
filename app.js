@@ -57,15 +57,15 @@ const adminConfig = {
 console.log(asd);
 console.log('Starting admin');
 
-xAdmin.init(adminConfig, function (err, admin) {
+// xAdmin.init(adminConfig, function (err, admin) {
   console.log('Admin started');
-  if (err) return console.log(err);
+  // if (err) return console.log(err);
   // web site
   // console.log(admin);
   console.log('Starting express app');
   var app = express();
   // mount express-admin before any other middlewares
-  app.use('/admin', admin);
+  // app.use('/admin', admin);
   // site specific middlewares
   // Client must send "Content-Type: application/json" header
   app.use(bodyParser.json(bodyParserJsonConfig()));
@@ -80,4 +80,4 @@ xAdmin.init(adminConfig, function (err, admin) {
   app.listen(port, function () {
       console.log(`My awesome site listening on port ${port}`);
   });
-});
+// });
