@@ -27,7 +27,7 @@ const asd = {
     "ssl": true
   },
   "server": {
-    "port": 3000
+    "port": process.env.PORT
   },
   "app": {
     "layouts": true,
@@ -70,7 +70,7 @@ xAdmin.init(adminConfig, function (err, admin) {
         res.send('Hello World');
     });
     // site server
-    const port = process.env.PORT || 3000
+    const port = process.env.PORT || 3000;
     app.listen(port, function () {
         console.log(`My awesome site listening on port ${port}`);
     });
